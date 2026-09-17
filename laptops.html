@@ -1,925 +1,569 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laptop Repairs | Smart Tech</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Custom CSS -->
-    <link href="css/style.css" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #FF138B; /* Bright pink */
-            --secondary-color: #c10f6b; /* Darker pink */
-            --light-pink: #ffebf6; /* Light pink background */
-            --light-color: #f8f9fa;
-            --dark-color: #212529;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: var(--dark-color);
-            line-height: 1.6;
-        }
-        
-        /* Header Styles */
-        .laptop-header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 5rem 0 4rem;
-            margin-bottom: 3rem;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .laptop-header::before {
-            content: "";
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 200px;
-            height: 200px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-        }
-        
-        .laptop-header::after {
-            content: "";
-            position: absolute;
-            bottom: -80px;
-            left: -30px;
-            width: 250px;
-            height: 250px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-        }
-        
-        /* Product Card Styles */
-        .laptop-card {
-            border: none;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-            margin-bottom: 2rem;
-            overflow: hidden;
-            border-top: 4px solid var(--primary-color);
-        }
-        
-        .laptop-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(255, 19, 139, 0.15);
-        }
-        
-        .laptop-img {
-            width: 100%;
-            height: 200px;
-            object-fit: contain;
-            padding: 1rem;
-            background-color: var(--light-color);
-        }
-        
-        /* Button Styles */
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            border: none;
-        }
-        
-        .btn-primary:hover {
-            background: linear-gradient(135deg, #e0127d, #a00d5a);
-        }
-        
-        /* Repair Detail Page Styles */
-        .repair-section {
-            background-color: #fff;
-            padding: 40px 0;
-            border-radius: 10px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .repair-header {
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        
-        .repair-header h2 {
-            color: #333;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-        
-        .repair-header h3 {
-            color: var(--primary-color);
-            font-weight: 600;
-        }
-        
-        .repair-card {
-            background: var(--light-pink);
-            border-radius: 8px;
-            padding: 25px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            height: 100%;
-            transition: all 0.3s ease;
-            border: 1px solid #eee;
-            margin-top: 50px;
-        }
-        
-        .repair-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(255, 19, 139, 0.15);
-        }
-        
-        .repair-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: #333;
-            text-align: center;
-        }
-        
-        .repair-price {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 25px;
-            text-align: center;
-        }
-        
-        .spec-item {
-            margin-bottom: 12px;
-            padding-bottom: 12px;
-            text-align: center;
-            border-bottom: 1px solid var(--primary-color);
-        }
-        
-        .spec-value {
-            color: #333;
-            font-weight: 500;
-        }
-        
-        .highlight-card {
-            border: 2px solid var(--secondary-color);
-            position: relative;
-            background-color: var(--light-pink);
-        }
-        
-        .highlight-badge {
-            position: absolute;
-            top: -12px;
-            right: 20px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            box-shadow: 0 2px 8px rgba(255, 19, 139, 0.3);
-        }
-        
-        /* Back Button */
-        .back-btn {
-            margin-bottom: 30px;
-            background: none;
-            border: none;
-            color: var(--primary-color);
-            font-weight: 600;
-            cursor: pointer;
-        }
-        
-        .back-btn:hover {
-            color: var(--secondary-color);
-        }
-        
-        /* Additional Services Styles */
-        .additional-services {
-            margin-top: 50px;
-            padding: 30px 0;
-        }
-        
-        .service-card {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-            border-left: 4px solid var(--primary-color);
-        }
-        
-        .service-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 19, 139, 0.1);
-        }
-        
-        .service-title {
-            font-weight: 600;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .service-price {
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
-        
-        .service-icon {
-            margin-right: 10px;
-            color: var(--primary-color);
-            font-size: 1.2rem;
-        }
-        
-        .btn-add-to-cart {
-            background: #c10f6b;
-            color:white;
-            border: 1px solid var(--primary-color);
-            padding: 5px 15px;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-add-to-cart:hover {
-            background: var(--primary-color);
-            color: white;
-        }
-        
-        /* Booking Modal Styles */
-        .booking-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1050;
-            overflow-y: auto;
-        }
-        
-        .booking-modal-content {
-            background-color: white;
-            margin: 5% auto;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 25px rgba(255, 19, 139, 0.3);
-            max-width: 600px;
-            width: 90%;
-            position: relative;
-        }
-        
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            cursor: pointer;
-            background: none;
-            border: none;
-        }
-        
-        .modal-header {
-            border-bottom: 1px solid #eee;
-            padding-bottom: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .modal-title {
-            color: var(--primary-color);
-            font-weight: 700;
-        }
-        
-        .form-label {
-            font-weight: 600;
-        }
-        
-        .form-control {
-            margin-bottom: 15px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-            padding: 10px 15px;
-        }
-        
-        .form-control:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 0.25rem rgba(255, 19, 139, 0.25);
-        }
-        
-        .submit-btn {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 5px;
-            font-weight: 600;
-            width: 100%;
-            margin-top: 15px;
-            transition: all 0.3s ease;
-        }
-        
-        .submit-btn:hover {
-            background: linear-gradient(135deg, #e0127d, #a00d5a);
-            transform: translateY(-2px);
-        }
-        
-        .booking-summary {
-            background-color: var(--light-pink);
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-        
-        .summary-title {
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
-        
-        .summary-item {
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-        }
-        
-        .summary-label {
-            font-weight: 600;
-        }
-        
-        /* Responsive Styles */
-        @media (max-width: 768px) {
-            .laptop-header {
-                padding: 4rem 0 3rem;
-            }
-            
-            .laptop-header h1 {
-                font-size: 2.2rem;
-            }
-            
-            .laptop-img {
-                height: 150px;
-            }
-            
-            .repair-card {
-                margin-bottom: 20px;
-            }
-            
-            .booking-modal-content {
-                margin: 10% auto;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Tech</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Custom CSS -->
+  <link href="css/style.css" rel="stylesheet">
+
 </head>
 <body>
-    <!-- Navbar loaded via JavaScript -->
-    <div id="navbar-container"></div>
+  <!-- Navbar loaded via JavaScript -->
+  <div id="navbar-container"></div>
 
-    <!-- Main Content Area -->
-    <div id="main-content" class="container">
-        <!-- Content will be dynamically loaded here -->
-    </div>
-
-    <!-- Footer loaded via JavaScript -->
-    <div id="footer-container"></div>
-
-    <!-- Booking Modal -->
-    <div id="bookingModal" class="booking-modal">
-        <div class="booking-modal-content">
-            <button class="close-modal">&times;</button>
-            <div class="modal-header">
-                <h3 class="modal-title">Book Your Repair</h3>
+  <!-- Main Content -->
+  <main class="container-fluid border border-bottom-2 lg-shadow sm-shadow mt-4">
+    <section class="hero-section pt-5">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+          <!-- Text Content -->
+          <div class="col-lg-6 mb-4 mb-lg-0 d-flex flex-column justify-content-center align-items-center text-center">
+            <h2 class="fw-bold display-6" style="color:#FF138B;">
+              Something Wrong with Your Device?
+            </h2>
+            <span class="display-6">Let Us Help!</span>
+            <hr class="w-50">
+            <p class="mb-4">
+              <span class="d-block ">Phone. iPad. Laptop. Smartwatch. Speaker. Mackbook</span>
+            </p>
+            <div class="d-flex flex-wrap justify-content-center">
+              <a href="/repair.html" class="btn btn-primary btn-lg px-4 py-2">Book a Repair</a>
             </div>
-            <div class="booking-summary">
-                <h5 class="summary-title">Repair Summary</h5>
-                <div class="summary-item">
-                    <span class="summary-label">Device:</span>
-                    <span id="modalDevice">Dell XPS 15</span>
-                </div>
-                <div class="summary-item">
-                    <span class="summary-label">Repair Plan:</span>
-                    <span id="modalPlan">Premium Screen Replacement</span>
-                </div>
-                <div class="summary-item">
-                    <span class="summary-label">Price:</span>
-                    <span id="modalPrice">£479.00</span>
-                </div>
-            </div>
-              <form id="bookingForm" action="https://formsubmit.co/smarttechchislehurst@gmail.com" method="POST">
-                <input type="hidden" name="_subject" value="Iphone Repair Booking">
-                <input type="hidden" name="_template" value="table">
-                <input type="hidden" name="_next" value="#">
-                <div class="row g-2">
-                    <div class="col-md-6">
-                        <label for="name" class="form-label">Full Name</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="email" class="form-label">Email Address</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
-                    </div>
-                    <div class="row g-2">
-                        <div class="col-md-6">
-                            <label for="phone" class="form-label">Phone Number</label>
-                            <input type="tel" class="form-control" id="phone" name="phone" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="date" class="form-label">Appointment Date & Time</label>
-                            <input type="datetime-local" class="form-control" id="date" name="date" required>
-                        </div>
-
-                        <div class="">
-                            <label for="time" class="form-label">Preferred Store</label>
-                            <select class="form-control" id="time" name="time" required>
-                                <option value="" class="fw-bold">SELECT A STORE</option>
-                                <option value="46 Sidcup High Street, DA14 6EH">46 Sidcup High Street, DA14 6EH</option>
-                                <option value="158 Eltham High Street, SE9 1BJ">158 Eltham High Street, SE9 1BJ</option>
-                                <option value="21 Park, Road BR7 5AY">21 Park, Road BR7 5AY</option>
-                                <option value="96A Broadway, Bexleyheath DA6 7DE">96A Broadway, Bexleyheath DA6 7DE
-                                </option>
-                                <option value="11 Swanley high street BR8 8AE">11 Swanley high street BR8 8AE
-                                </option>
-                                <option value="4, Rice Parade, Fairway, Petts Wood, Orpington BR5 1EQ">4, Rice Parade, Fairway,
-                                    Petts Wood, Orpington BR5 1EQ </option>
-                                <option value="407 footscrey road new Eltham SE9 3UL">407 footscrey road new
-                                    Eltham SE9 3UL</option>
-                                <option value="40 bexley village DA5 1AH">40 bexley village DA5
-                                    1AH</option>
-                                <option value="44 Bellegrove Rd, Welling DA16 3PY">44 Bellegrove Rd, Welling DA16 3PY</option>
-                            </select>
-                        </div>
-          
-                        <input type="hidden" id="hiddenDevice" name="device">
-                        <input type="hidden" id="hiddenPlan" name="plan">
-                        <input type="hidden" id="hiddenPrice" name="price">
-                        <button type="submit" class="submit-btn">Book Now</button>
-            </form>
+          </div>
+          <!-- Image Content -->
+          <div class="col-lg-6 d-flex justify-content-center align-items-center">
+            <img src="/Images/hero.png" alt="Device repair services" class="img-fluid w-100 text-center">
+          </div>
         </div>
+      </div>
+    </section>
+  </main>
+  
+<!--Device Section-->
+<section class="device-selection py-5 bg-light">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="fw-bold" style="color:#FF138B;">Choose Your Device</h2>
+        <hr class="divider">
+        <p class="mx-auto max-width-600">
+          Select your device brand, then choose the type of repair service you require.
+        </p>
+      </div>
+  
+      <div class="row g-4">
+        <!-- Mobile Card -->
+        <div class="col-md-3 col-12">
+          <div class="card h-100 border-0 shadow-sm text-center py-4">
+            <div class="card-body">
+              <img src="https://www.bigcmobiles.com/media/catalog/product/cache/e19e56cdd4cf1b4ec073d4305f5db95a/m/i/midnight_1.jpg" alt="Mobile" class="img-fluid image">
+              <h5 class="card-title fw-bold">Mobile Phone</h5>
+              <a href="/mobilebrands.html" class="btn btn-primary mt-3 px-4">Book Now</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Tablet Card -->
+        <div class="col-md-3 col-12">
+          <div class="card h-100 border-0 shadow-sm text-center py-4">
+            <div class="card-body">
+                <img src="https://www.bigcmobiles.com/media/catalog/product/cache/e19e56cdd4cf1b4ec073d4305f5db95a/2/_/2_203_3.jpg" alt="Mobile" class="img-fluid image">
+              <h5 class="card-title fw-bold">Ipad</h5>
+              <a href="/ipad.html" class="btn btn-primary mt-3 px-4">Book Now</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Watch Card -->
+        <div class="col-md-3 col-12">
+          <div class="card h-100 border-0 shadow-sm text-center py-4">
+            <div class="card-body">
+                <img src="https://www.bigcmobiles.com/media/catalog/product/cache/e19e56cdd4cf1b4ec073d4305f5db95a/s/a/samsung_galaxy_tab_a9_5g_dark_blue_.jpg" alt="Mobile" class="img-fluid image">
+              <h5 class="card-title fw-bold pb-2">Tablet</h5>
+              <a href="/samsungtab.html" class="btn btn-primary mt-3 px-4">Book Now</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Laptop Card -->
+        <div class="col-md-3 col-12">
+          <div class="card h-100 border-0 shadow-sm text-center py-4">
+            <div class="card-body">
+              <img src="https://img.drz.lazcdn.com/static/pk/p/8fa9eac996027142c7844bee36efd233.png_720x720q80.png_.webp" class="img-fluid image" alt="Laptop">
+              <h5 class="card-title fw-bold pb-2">Laptop</h5>
+              <a href="/laptops.html" class="btn btn-primary mt-3 px-4">Book Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row my-5 g-4">
+        <!-- Mobile Card -->
+        <div class="col-md-3 col-12">
+          <div class="card h-100 border-0 shadow-sm text-center py-4">
+            <div class="card-body">
+                <img src="https://www.bigcmobiles.com/media/catalog/product/cache/e19e56cdd4cf1b4ec073d4305f5db95a/b/o/boat_wave_astra_3_smart_watch.jpg" alt="Mobile" class="img-fluid image">
+              <h5 class="card-title fw-bold">Smartwatch</h5>
+              <a href="/watch.html" class="btn btn-primary mt-3 px-4">Book Now</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Tablet Card -->
+        <div class="col-md-3 col-12">
+          <div class="card h-100 border-0 shadow-sm text-center py-4">
+            <div class="card-body">
+                <img src="https://img.drz.lazcdn.com/static/pk/p/0f98658693605843ed97b430acf2ed6b.jpg_720x720q80.jpg_.webp" alt="Mobile" class="img-fluid image">
+              <h5 class="card-title fw-bold">PC/Computer</h5>
+              <a href="#" class="btn btn-primary mt-3 px-4">Book Now</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Laptop Card -->
+        <div class="col-md-3 col-12">
+          <div class="card h-100 border-0 shadow-sm text-center py-4">
+            <div class="card-body">
+                <img src="https://img.drz.lazcdn.com/static/pk/p/f558a077440f8fe67d30050d19e05be2.jpg_720x720q80.jpg_.webp" alt="Mobile" class="img-fluid pb-3">
+              <h5 class="card-title fw-bold">Macbook</h5>
+              <a href="#" class="btn btn-primary mt-3 px-4">Book Now</a>
+            </div>
+          </div>
+        </div>
+
+         <!-- Gamingconsole Card -->
+         <div class="col-md-3 col-12">
+          <div class="card h-100 border-0 shadow-sm text-center py-4">
+            <div class="card-body">
+                <img src="https://nadia.apnadeveloper.com/wp-content/uploads/2023/07/7th.png" alt="Mobile" class="img-fluid pb-3">
+              <h5 class="card-title fw-bold mt-2">Gaming Console</h5>
+              <a href="/gamingconsole.html" class="btn btn-primary mt-4">Book Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </section>
+
+    <!--Assessories Section-->
+<section class="device-selection py-5 bg-light">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold mb-3" style="color:#FF138B;">OUR SERVICES</h2>
+      <hr class="divider">
     </div>
 
-    <!-- Bootstrap JS Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JS -->
-    <script src="js/script.js"></script>
-    
-    <!-- Main Application Script -->
-    <script>
-        // Laptop product data with 4 repair options for each model
-        const laptops = {
-            'dell-xps-15': {
-                title: 'Dell XPS 15',
-                image: 'https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80',
-                options: [
-                   
-                    {
-                        name: 'Standard',
-                        price: '£399.00',
-                        specs: {
-                            'Repair Type': 'Screen Replacement',
-                            'Quality': 'High-grade',
-                            'Warranty': '1 Year',
-                            'Repair Time': '1 Day'
-                        }
-                    },
-                    {
-                        name: 'Premium',
-                        price: '£479.00',
-                        specs: {
-                            'Repair Type': 'Screen Replacement',
-                            'Quality': 'Premium',
-                            'Warranty': '2 Years',
-                            'Repair Time': 'Same Day'
-                        }
-                    },
-                    {
-                        name: 'Genuine',
-                        price: '£699.00',
-                        specs: {
-                            'Repair Type': 'Screen Replacement',
-                            'Quality': 'Dell Genuine',
-                            'Warranty': '3 Years',
-                            'Repair Time': 'Same Day'
-                        }
-                    }
-                ]
-            },
-            'dell-xps-14': {
-                title: 'Dell XPS 14',
-                image: 'https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80',
-                options: [
-                   
-                    {
-                        name: 'Standard',
-                        price: '£399.00',
-                        specs: {
-                            'Repair Type': 'Screen Replacement',
-                            'Quality': 'High-grade',
-                            'Warranty': '1 Year',
-                            'Repair Time': '1 Day'
-                        }
-                    },
-                    {
-                        name: 'Premium',
-                        price: '£479.00',
-                        specs: {
-                            'Repair Type': 'Screen Replacement',
-                            'Quality': 'Premium',
-                            'Warranty': '2 Years',
-                            'Repair Time': 'Same Day'
-                        }
-                    },
-                    {
-                        name: 'Genuine',
-                        price: '£699.00',
-                        specs: {
-                            'Repair Type': 'Screen Replacement',
-                            'Quality': 'Dell Genuine',
-                            'Warranty': '3 Years',
-                            'Repair Time': 'Same Day'
-                        }
-                    }
-                ]
-            },
-            'hp-spectre-x360': {
-                title: 'HP Spectre x360',
-                image: 'https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80',
-                options: [
-                   
-                    {
-                        name: 'Standard',
-                        price: '£379.00',
-                        specs: {
-                            'Repair Type': 'Screen Replacement',
-                            'Quality': 'High-grade',
-                            'Warranty': '1 Year',
-                            'Repair Time': '1 Day'
-                        }
-                    },
-                    {
-                        name: 'Premium',
-                        price: '£479.00',
-                        specs: {
-                            'Repair Type': 'Screen Replacement',
-                            'Quality': 'Premium',
-                            'Warranty': '2 Years',
-                            'Repair Time': 'Same Day'
-                        }
-                    },
-                    {
-                        name: 'Genuine',
-                        price: '£679.00',
-                        specs: {
-                            'Repair Type': 'Screen Replacement',
-                            'Quality': 'HP Genuine',
-                            'Warranty': '3 Years',
-                            'Repair Time': 'Same Day'
-                        }
-                    }
-                ]
-            },
-            'lenovo-thinkpad-x1': {
-                title: 'Lenovo ThinkPad X1',
-                image: 'https://images.unsplash.com/photo-1629131726692-1accd0c53ce0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80',
-                options: [
-                    
-                    {
-                        name: 'Standard',
-                        price: '£369.00',
-                        specs: {
-                            'Repair Type': 'Screen Replacement',
-                            'Quality': 'High-grade',
-                            'Warranty': '1 Year',
-                            'Repair Time': '1 Day'
-                        }
-                    },
-                    {
-                        name: 'Premium',
-                        price: '£469.00',
-                        specs: {
-                            'Repair Type': 'Screen Replacement',
-                            'Quality': 'Premium',
-                            'Warranty': '2 Years',
-                            'Repair Time': 'Same Day'
-                        }
-                    },
-                    {
-                        name: 'Genuine',
-                        price: '£669.00',
-                        specs: {
-                            'Repair Type': 'Screen Replacement',
-                            'Quality': 'Lenovo Genuine',
-                            'Warranty': '3 Years',
-                            'Repair Time': 'Same Day'
-                        }
-                    }
-                ]
-            }
-        };
+    <div class="row g-5 align-items-center justify-content-center">
+      <!-- Mobile Card -->
+      <div class="col-md-4 col-12">
+        <div class="card h-100 border-0 shadow-sm text-center py-4">
+          <div class="card-body">
+              <img src="/Images/accessories.svg" alt="Mobile" class="img-fluid w-25">
+            <h5 class="card-title fw-bold">Accessories</h5>
+            <a href="/repair.html" class="btn btn-primary mt-3 px-4">View Detail</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Tablet Card -->
+      <div class="col-md-4 col-12">
+        <div class="card h-100 border-0 shadow-sm text-center py-4">
+          <div class="card-body">
+              <img src="/Images/buy phone.svg" alt="Mobile" class="img-fluid w-25">
+            <h5 class="card-title fw-bold">Buy a phone</h5>
+            <a href="/sellbuy.html" class="btn btn-primary mt-3 px-4">Buy Phone</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- sell your device -->
+      <div class="col-md-4 col-12">
+        <div class="card h-100 border-0 shadow-sm text-center py-4">
+          <div class="card-body">
+              <img src="/Images/mobile buy.svg" alt="Mobile" class="img-fluid w-25">
+            <h5 class="card-title fw-bold">Sell your device</h5>
+            <a href="/sellbuy.html" class="btn btn-primary mt-3 px-4">Sell Your Phone</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+</section>
 
-        // Additional services data
-        const additionalServices = [
-            {
-                title: 'Genuine Screen',
-                price: '£240',
-                icon: 'bi-display'
-            },
-            {
-                title: 'Charging Dock',
-                price: '£70',
-                icon: 'bi-lightning-charge'
-            },
-            {
-                title: 'Audio',
-                price: '£65',
-                icon: 'bi-speaker'
-            },
-            {
-                title: 'Cameras',
-                price: '£99',
-                icon: 'bi-camera'
-            },
-            {
-                title: 'Camera Lens',
-                price: '£20',
-                icon: 'bi-camera2'
-            },
-            {
-                title: 'Liquid Diagnostics',
-                price: '£60',
-                icon: 'bi-droplet'
-            },
-            {
-                title: 'Back Glass Replacement',
-                price: '£85',
-                icon: 'bi-phone'
-            },
-            {
-                title: 'Data Recovery',
-                price: '£250',
-                icon: 'bi-hdd'
-            },
-            {
-                title: 'Battery',
-                price: '£200',
-                icon: 'bi-battery-full'
-            }
-        ];
+<!--why choose us-->
+<section class="why-choose-us">
+  <div class="container">
+      <div class="text-center">
+          <h2 class="section-title">Why Choose Us</h2>
+          <hr class="divider">
+          <p class="text-center">Your one-stop shop for all your mobile phone repair needs! We offer a wide range of repair services. We have a proven track record of working successfully with a wide range of customers from individuals to organizations.</p>
+         
+          
+          <div class="features-container">
+              <div class="feature-box">
+                  <div class="feature-icon">
+                      <i class="fas fa-bolt"></i>
+                  </div>
+                  <div class="feature-title">Fast <br>Repair</div>
+              </div>
+              
+              <div class="feature-box">
+                  <div class="feature-icon">
+                      <i class="fas fa-tag"></i>
+                  </div>
+                  <div class="feature-title">Low Price <br>Promise</div>
+              </div>
+              
+              <div class="feature-box">
+                  <div class="feature-icon">
+                      <i class="fas fa-cog"></i>
+                  </div>
+                  <div class="feature-title">Quality <br>Parts</div>
+              </div>
+              
+              <div class="feature-box">
+                  <div class="feature-icon">
+                      <i class="fas fa-user-tie"></i>
+                  </div>
+                  <div class="feature-title">Qualified <br>Technician</div>
+              </div>
+              
+              <div class="feature-box">
+                  <div class="feature-icon">
+                      <i class="fas fa-headset"></i>
+                  </div>
+                  <div class="feature-title">Excellent <br>Service</div>
+              </div>
+              
+              <div class="feature-box">
+                  <div class="feature-icon">
+                      <i class="fas fa-smile"></i>
+                  </div>
+                  <div class="feature-title">Happy <br>Customer</div>
+              </div>
 
-        // Show homepage with all laptops
-        function showHomePage() {
-            document.title = "Laptop Repairs | Smart Tech";
-            // window.history.pushState({}, '', '/');
-            
-            const mainContent = document.getElementById('main-content');
-            mainContent.innerHTML = `
-                <!-- Header -->
-                <header class="laptop-header text-center">
-                    <div class="container position-relative">
-                        <h1 class="display-4 fw-bold mb-3">Laptop Repairs</h1>
-                        <p class="lead mb-0">Expert repairs for all laptop models</p>
-                    </div>
-                </header>
-
-                <!-- Product Grid -->
-                <main class="container mb-5">
-                    <div class="row">
-                        ${Object.entries(laptops).map(([id, product]) => `
-                            <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
-                                <div class="laptop-card h-100">
-                                    <img src="${product.image}" class="laptop-img" alt="${product.title}">
-                                    <div class="card-body text-center">
-                                        <h3 class="h5 mb-3">${product.title}</h3>
-                                        <div class="d-grid">
-                                            <button class="btn btn-primary" onclick="showProductDetail('${id}')">View Options</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                </main>
-            `;
-            
-            // Animate cards on scroll
-            animateCards();
-        }
-
-        // Show product detail page
-        function showProductDetail(productId) {
-            const product = laptops[productId];
-            if (!product) return;
-            
-            document.title = `${product.title} Repairs | Smart Tech`;
-            window.history.pushState({}, '', `#${productId}`);
-            
-            const mainContent = document.getElementById('main-content');
-            mainContent.innerHTML = `
-                <button class="back-btn" onclick="showHomePage()">
-                    <i class="fas fa-arrow-left me-2"></i>Back to All Laptops
-                </button>
-                
-                <div class="repair-section">
-                    <div class="repair-header">
-                       <h3 class="fw-bold">${product.title}</h3>
-                          <h3>Repairing Details</h3>
-                    </div>
-                    
-                    <div class="row g-4">
-                        <!-- Specifications Column -->
-                        <div class="col-md-3">
-                            <div class="repair-card border-0" style="background-color: #ffffff; box-shadow: none;">
-                                <div class="repair-title mb-5 pt-3">
-                                    <p class="fw-bold" style="color:var(--primary-color);">${product.title} <br>Screen Replacement</p>
-                                </div>
-
-                                ${Object.keys(product.options[0].specs).map(spec => `
-                                    <div class="spec-item">
-                                        <div class="spec-value fw-bold">${spec}</div>
-                                    </div>
-                                `).join('')}
-                            </div>
-                        </div>
-                        
-                        <!-- Product Options -->
-                        ${product.options.map((option, index) => `
-                            <div class="col-md-3">
-                                <div class="repair-card ${index === 2 ? 'highlight-card' : ''}" 
-                                    style="background-color: ${index === 2 ? 'var(--light-pink)' : '#ffffff'};">
-                                    ${index === 2 ? '<div class="highlight-badge">Popular</div>' : ''}
-                                    <div class="repair-title">${option.name}</div>
-                                    <div class="repair-price">${option.price}</div>
-                                    
-                                    ${Object.values(option.specs).map(value => `
-                                        <div class="spec-item">
-                                            <div class="spec-value">${value}</div>
-                                        </div>
-                                    `).join('')}
-                                    
-                                    <button class="btn btn-primary mt-3 px-4 btn-book" 
-                                        onclick="openBookingModal('${product.title}', '${option.name} Screen Replacement', '${option.price}')">
-                                        Book Now
-                                    </button>
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-
-                    <!-- Additional Services Section -->
-                    <div class="additional-services">
-                        <h3 class="text-center mb-4" style="color: var(--primary-color);">Additional Services</h3>
-                        <div class="row">
-                            ${additionalServices.map(service => `
-                                <div class="col-md-6 col-lg-4 col-xl-3">
-                                    <div class="service-card">
-                                        <div class="service-title">
-                                            <i class="bi ${service.icon} service-icon"></i>
-                                            ${service.title}
-                                        </div>
-                                        <div class="service-price">${service.price}</div>
-                                        <button class="btn btn-add-to-cart w-100" 
-                                            onclick="openBookingModal('Additional Service', '${service.title}', '${service.price}')">
-                                            Book Now
-                                        </button>
-                                    </div>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
+              <div class="feature-box">
+                <div class="feature-icon">
+                    <i class="fa-solid fa-award"></i>
                 </div>
-            `;
-        }
+                <div class="feature-title">Lifetime <br>Warranty</div>
+            </div>
+          </div>
+      </div>
+  </div>
+</section>
+<!--Testimonials Section-->
+<section class="testimonials">
+  <div class="container">
+      <h2 class="section-title">Customer Testimonials</h2>
+      
+      <div class="testimonial-slider-container">
+          <div class="slider-nav prev">
+              <i class="fas fa-chevron-left"></i>
+          </div>
+          
+          <div class="testimonial-slider">
+              <div class="slider-track" id="sliderTrack">
+                  <!-- Testimonial 1 -->
+                  <div class="testimonial-card">
+                      <div class="client-info">
+                          <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Client" class="client-img">
+                          <div>
+                              <h5 class="client-name">Sarah Johnson</h5>
+                              <p class="client-role">Small Business Owner</p>
+                          </div>
+                      </div>
+                      <p class="testimonial-text">
+                          "My phone was repaired in under an hour! The service was exceptional and the staff was very professional. Will definitely recommend to friends."
+                      </p>
+                      <div class="rating">
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                      </div>
+                  </div>
+                  
+                  <!-- Testimonial 2 -->
+                  <div class="testimonial-card">
+                      <div class="client-info">
+                          <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Client" class="client-img">
+                          <div>
+                              <h5 class="client-name">Michael Chen</h5>
+                              <p class="client-role">IT Manager</p>
+                          </div>
+                      </div>
+                      <p class="testimonial-text">
+                          "We use their corporate services for our company devices. Reliable, fast, and cost-effective. They've saved us thousands in replacement costs."
+                      </p>
+                      <div class="rating">
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star-half-alt"></i>
+                      </div>
+                  </div>
+                  
+                  <!-- Testimonial 3 -->
+                  <div class="testimonial-card">
+                      <div class="client-info">
+                          <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Client" class="client-img">
+                          <div>
+                              <h5 class="client-name">Emily Rodriguez</h5>
+                              <p class="client-role">College Student</p>
+                          </div>
+                      </div>
+                      <p class="testimonial-text">
+                          "Fixed my water-damaged phone when others said it couldn't be done. Affordable pricing for students too. Very happy with the service!"
+                      </p>
+                      <div class="rating">
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                      </div>
+                  </div>
+                  
+                  <!-- Testimonial 4 -->
+                  <div class="testimonial-card">
+                      <div class="client-info">
+                          <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Client" class="client-img">
+                          <div>
+                              <h5 class="client-name">David Wilson</h5>
+                              <p class="client-role">Retired</p>
+                          </div>
+                      </div>
+                      <p class="testimonial-text">
+                          "Patient service for someone not tech-savvy like me. Explained everything clearly and didn't try to upsell unnecessary services."
+                      </p>
+                      <div class="rating">
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="far fa-star"></i>
+                      </div>
+                  </div>
+                  
+                  <!-- Testimonial 5 -->
+                  <div class="testimonial-card">
+                      <div class="client-info">
+                          <img src="https://randomuser.me/api/portraits/women/54.jpg" alt="Client" class="client-img">
+                          <div>
+                              <h5 class="client-name">Jennifer Lee</h5>
+                              <p class="client-role">Marketing Director</p>
+                          </div>
+                      </div>
+                      <p class="testimonial-text">
+                          "Quick turnaround on my cracked screen before an important business trip. The repair looks brand new and has held up perfectly."
+                      </p>
+                      <div class="rating">
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                      </div>
+                  </div>
+                  
+                  <!-- Testimonial 6 -->
+                  <div class="testimonial-card">
+                      <div class="client-info">
+                          <img src="https://randomuser.me/api/portraits/men/76.jpg" alt="Client" class="client-img">
+                          <div>
+                              <h5 class="client-name">Robert Taylor</h5>
+                              <p class="client-role">Freelancer</p>
+                          </div>
+                      </div>
+                      <p class="testimonial-text">
+                          "Fixed my charging port issue same day. Honest assessment - only charged for what was needed. Will be my go-to repair shop from now on."
+                      </p>
+                      <div class="rating">
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star-half-alt"></i>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          
+          <div class="slider-nav next">
+              <i class="fas fa-chevron-right"></i>
+          </div>
+          
+          <div class="slider-dots" id="sliderDots"></div>
+      </div>
+  </div>
+</section>
+<!--ebmed multi map-->
+  <section>
+<iframe src="https://www.google.com/maps/d/embed?mid=1aLkQv15kc6aKckq5bdTbuliBuBe8j90&hl=en&ehbc=2E312F" width="100%" height="600" class="map-iframe" allowfullscreen="" title="Google Maps location of Tech Smart Repair"></iframe>
 
-        // Open booking modal with specific product details
-        function openBookingModal(device, plan, price) {
-            document.getElementById('modalDevice').textContent = device;
-            document.getElementById('modalPlan').textContent = plan;
-            document.getElementById('modalPrice').textContent = price;
-            
-            // Set hidden form values
-            document.getElementById('hiddenDevice').value = device;
-            document.getElementById('hiddenPlan').value = plan;
-            document.getElementById('hiddenPrice').value = price;
-            
-            const modal = document.getElementById('bookingModal');
-            modal.style.display = 'block';
-            
-            // Set minimum date to today
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('date').min = today;
-        }
+  </section>
+  <!-- Footer loaded via JavaScript -->
+  <div id="footer-container"></div>
 
-        // Close booking modal
-        function closeBookingModal() {
-            document.getElementById('bookingModal').style.display = 'none';
-        }
-
-        // Handle booking form submission
-        function handleBookingSubmit(event) {
-            event.preventDefault();
-            
-            // Show confirmation
-            const plan = document.getElementById('modalPlan').textContent;
-            const price = document.getElementById('modalPrice').textContent;
-            showBookingAlert(plan, price);
-            
-            // Submit the form
-            event.target.submit();
-            
-            // Close modal and reset form
-            closeBookingModal();
-            document.getElementById('bookingForm').reset();
-        }
-
-        // Show booking confirmation alert
-        function showBookingAlert(planTitle, price) {
-            const alertBox = document.createElement('div');
-            alertBox.style.position = 'fixed';
-            alertBox.style.top = '50%';
-            alertBox.style.left = '50%';
-            alertBox.style.transform = 'translate(-50%, -50%)';
-            alertBox.style.backgroundColor = 'white';
-            alertBox.style.padding = '30px';
-            alertBox.style.borderRadius = '10px';
-            alertBox.style.boxShadow = '0 5px 25px rgba(255, 19, 139, 0.3)';
-            alertBox.style.zIndex = '1000';
-            alertBox.style.textAlign = 'center';
-            alertBox.style.maxWidth = '400px';
-            alertBox.style.width = '90%';
-
-            alertBox.innerHTML = `
-                <h4 style="color: var(--primary-color); margin-bottom: 20px;">Booking Confirmation</h4>
-                <p>You've selected the <strong>${planTitle}</strong> plan for ${price}.</p>
-                <p style="margin-bottom: 25px;">Our team will contact you shortly to confirm your appointment.</p>
-                <button id="closeAlert" style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); 
-                    color: white; border: none; padding: 10px 25px; border-radius: 5px; 
-                    cursor: pointer; font-weight: 600;">Continue</button>
-            `;
-
-            document.body.appendChild(alertBox);
-
-            document.getElementById('closeAlert').addEventListener('click', function() {
-                document.body.removeChild(alertBox);
-            });
-        }
-
-        // Animate cards on scroll
-        function animateCards() {
-            const cards = document.querySelectorAll('.laptop-card');
-            cards.forEach(card => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            });
-            
-            const animateOnScroll = function() {
-                cards.forEach(card => {
-                    const cardPosition = card.getBoundingClientRect().top;
-                    const screenPosition = window.innerHeight / 1.3;
-                    
-                    if (cardPosition < screenPosition) {
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateY(0)';
-                    }
-                });
-            };
-            
-            animateOnScroll();
-            window.addEventListener('scroll', animateOnScroll);
-        }
-
-        // Handle page load and navigation
-        function handleNavigation() {
-            const hash = window.location.hash.substring(1);
-            
-            if (hash && laptops[hash]) {
-                showProductDetail(hash);
-            } else {
-                showHomePage();
-            }
-        }
-
-        // Initialize the application
-        document.addEventListener('DOMContentLoaded', function() {
-            handleNavigation();
-            
-            // Set up modal event listeners
-            document.querySelector('.close-modal').addEventListener('click', closeBookingModal);
-            document.getElementById('bookingForm').addEventListener('submit', handleBookingSubmit);
-            
-            // Close modal when clicking outside
-            window.addEventListener('click', function(event) {
-                const modal = document.getElementById('bookingModal');
-                if (event.target === modal) {
-                    closeBookingModal();
-                }
-            });
-        });
+  <!-- Bootstrap JS Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
+  <script src="js/script.js"></script>
+  <script>
+    // Toggle read more content
+    document.getElementById('readMoreBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        const moreContent = document.getElementById('moreContent');
+        const icon = this.querySelector('i');
         
-        window.addEventListener('popstate', handleNavigation);
-    </script>
-    <!-- whatsApp Widget JS -->
-    <script src="/js/load-widget.js"></script>
+        if (moreContent.classList.contains('d-none')) {
+            moreContent.classList.remove('d-none');
+            this.innerHTML = 'Read less <i class="fas fa-chevron-up"></i>';
+        } else {
+            moreContent.classList.add('d-none');
+            this.innerHTML = 'Read more <i class="fas fa-chevron-down"></i>';
+        }
+    });
+</script>
+<!--testimonial script-->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      const sliderTrack = document.getElementById('sliderTrack');
+      const prevBtn = document.querySelector('.prev');
+      const nextBtn = document.querySelector('.next');
+      const sliderDots = document.getElementById('sliderDots');
+      const cards = document.querySelectorAll('.testimonial-card');
+      let currentIndex = 0;
+      let cardWidth = cards[0].offsetWidth + 15; // width + margin-right
+      let visibleCards = 4;
+      let autoplayInterval;
+      
+      // Initialize slider
+      initSlider();
+      
+      // Create dots
+      createDots();
+      
+      // Next button click
+      nextBtn.addEventListener('click', function() {
+          clearInterval(autoplayInterval);
+          slideTo(currentIndex + 1);
+          startAutoplay();
+      });
+      
+      // Previous button click
+      prevBtn.addEventListener('click', function() {
+          clearInterval(autoplayInterval);
+          slideTo(currentIndex - 1);
+          startAutoplay();
+      });
+      
+      // Window resize
+      window.addEventListener('resize', function() {
+          updateCardWidth();
+          updateSliderPosition();
+      });
+      
+      // Initialize slider
+      function initSlider() {
+          updateCardWidth();
+          updateSliderPosition();
+          startAutoplay();
+      }
+      
+      // Update card width based on screen size
+      function updateCardWidth() {
+          const screenWidth = window.innerWidth;
+          
+          if (screenWidth >= 1200) {
+              visibleCards = 4;
+          } else if (screenWidth >= 992) {
+              visibleCards = 3;
+          } else if (screenWidth >= 576) {
+              visibleCards = 2;
+          } else {
+              visibleCards = 1;
+          }
+          
+          cardWidth = sliderTrack.offsetWidth / visibleCards;
+          cards.forEach(card => {
+              card.style.flex = `0 0 calc(${100 / visibleCards}% - 15px)`;
+          });
+      }
+      
+      // Slide to specific index
+      function slideTo(index) {
+          const maxIndex = Math.max(cards.length - visibleCards, 0);
+          currentIndex = Math.max(0, Math.min(index, maxIndex));
+          updateSliderPosition();
+          updateDots();
+      }
+      
+      // Update slider position
+      function updateSliderPosition() {
+          sliderTrack.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+          updateNavButtons();
+      }
+      
+      // Update navigation buttons
+      function updateNavButtons() {
+          prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
+          prevBtn.style.cursor = currentIndex === 0 ? 'not-allowed' : 'pointer';
+          
+          nextBtn.style.opacity = currentIndex >= cards.length - visibleCards ? '0.5' : '1';
+          nextBtn.style.cursor = currentIndex >= cards.length - visibleCards ? 'not-allowed' : 'pointer';
+      }
+      
+      // Create dots
+      function createDots() {
+          sliderDots.innerHTML = '';
+          const dotCount = Math.max(cards.length - visibleCards + 1, 1);
+          
+          for (let i = 0; i < dotCount; i++) {
+              const dot = document.createElement('div');
+              dot.classList.add('dot');
+              if (i === 0) dot.classList.add('active');
+              dot.addEventListener('click', () => {
+                  clearInterval(autoplayInterval);
+                  slideTo(i);
+                  startAutoplay();
+              });
+              sliderDots.appendChild(dot);
+          }
+      }
+      
+      // Update dots
+      function updateDots() {
+          const dots = document.querySelectorAll('.dot');
+          dots.forEach((dot, index) => {
+              dot.classList.toggle('active', index === currentIndex);
+          });
+      }
+      
+      // Autoplay
+      function startAutoplay() {
+          clearInterval(autoplayInterval);
+          autoplayInterval = setInterval(() => {
+              if (currentIndex >= cards.length - visibleCards) {
+                  slideTo(0);
+              } else {
+                  slideTo(currentIndex + 1);
+              }
+          }, 3000);
+      }
+  });
+</script>
+<!-- whatsApp Widget JS -->
+<script src="/js/load-widget.js"></script>
+
+<!--Add the following script at the bottom of the web page (before </body></html>)-->
+<script type="text/javascript">function add_chatinline(){var hccid=82255375;var nt=document.createElement("script");nt.async=true;nt.src="https://mylivechat.com/chatinline.aspx?hccid="+hccid;var ct=document.getElementsByTagName("script")[0];ct.parentNode.insertBefore(nt,ct);}
+add_chatinline();</script>
 </body>
 </html>
